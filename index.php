@@ -12,14 +12,22 @@ if(isset($_REQUEST['hours'])){
     
     //convert seconds into seconds rather than a percent 
     $seconds = ('.'.substr($paces[1],0,2))*60; 
+    
     //add a leading 0 if seconds are single digit 
     if(strlen($seconds) == 1){$seconds = '0'.$seconds;}
     
     // echo out pace 
-    echo $minutes.":".$seconds.' pace needed to run a half in '
+    $paceMsg =  $minutes.":".$seconds.' pace needed to run a half in '
          .$_REQUEST['hours']." hours and "
          .$_REQUEST['minutes']." minutes.";    
 
+    include 'show_data.html.php';
+    exit();
+}
+
+if( isset( $_REQUEST['showsplits'])){
+    echo "show splits selected";
+    include "show_data.html.php";
     exit();
 }
 
