@@ -1,17 +1,24 @@
 <?php
 
 if(isset($_REQUEST['hours'])){
-    $hours = $_REQUEST['hours'];
-    $minutes = $_REQUEST['minutes'];
-    
-    //convert hours to minutes 
-    $totalMinutes += $hours * 60;
-    $totalMinutes += $minutes;
 
-    $pace = substr($totalMinutes/13.109375, 0, 4);
+    // get pace, with "seconds" as percent 
+    $pace = ($_REQUEST['hours']*60+$_REQUEST['minutes'])/13.1094;
 
-    echo $pace . " pace needed to run " . $hours . ":" . $minutes;
+    // split pace on the dot
+    $paces = explode('.', $pace );
     
+    $minutes = $paces[0];
+    
+    //convert seconds into seconds rather than a percent 
+    $seconds = ('.'.substr($paces[1],0,2))*60; 
+    //add a leading 0 if seconds are single digit 
+    if(strlen($seconds) == 1){$seconds = '0'.$seconds;}
+    
+    // echo out pace 
+    echo $minutes.":".$seconds.' pace needed to run a half in '
+         .$_REQUEST['hours']." hours and "
+         .$_REQUEST['minutes']." minutes.";    
 
     exit();
 }
