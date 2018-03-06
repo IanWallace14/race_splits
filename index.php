@@ -2,8 +2,13 @@
 
 if(isset($_REQUEST['hours'])){
 
+    echo 'hours: ' . $_REQUEST['hours'] . '<br>';
+    echo 'minutes: ' . $_REQUEST['minutes'] . '<br>';
+    echo 'seconds: ' . $_REQUEST['seconds'] . '<br>';
+
     // get pace, with "seconds" as percent 
-    $pace = ($_REQUEST['hours']*60+$_REQUEST['minutes'])/13.1094;
+    $pace = ($_REQUEST['hours']*60*60+$_REQUEST['minutes']*60+$_REQUEST['seconds']);///13.1094;
+    echo '<br> pace: ' . $pace . '<br>';
 
     // split pace on the dot
     $paces = explode('.', $pace );
